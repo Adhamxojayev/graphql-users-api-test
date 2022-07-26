@@ -1,0 +1,12 @@
+input Pagination {
+    page: Int
+    limit: Int
+}
+
+type MutationResponse {
+    status: Int
+    message: String
+    data: Any
+}
+
+scalar Any
