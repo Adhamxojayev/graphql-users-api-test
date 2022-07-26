@@ -1,5 +1,8 @@
 import { ApolloServer, gql } from 'apollo-server-express';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} from "apollo-server-core";
 import express from 'express';
 import http from 'http';
 import './config/index.js'
@@ -15,8 +18,11 @@ async function startApolloServer() {
     schema,
     introspection: true,
     csrfPrevention: true,
-    cache: 'bounded',
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    cache: "bounded",
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+    ],
   });
   await server.start();
   server.applyMiddleware({ app });
